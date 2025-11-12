@@ -2,9 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+// Login
+Route::get('/', [\App\Http\Controllers\LoginController::class,'index']);
+Route::get('login', [\App\Http\Controllers\LoginController::class,'index'])->name('index');
+Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
+Route::get('sign-out', [\App\Http\Controllers\LoginController::class, 'logout'])->name('sign-out');
+
+//prefix admin
+Route::prefix('admin')->group(function(){
+    Route::resource('dashboard', \App\Http\Controllers\ADMIN\DashboardController::class);
 });
+
+
 
 // route get : melihat. membaca 
 
